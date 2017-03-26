@@ -15,7 +15,7 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define({
+define(Object.assign({
   //Default configuration settings for the application. This is where you'll define things like a bing maps key,
   //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
   "appid": "",
@@ -25,7 +25,7 @@ define({
   "group": "",
   //Enter the url to the proxy if needed by the application. See the 'Using the proxy page' help topic for details
   //http://developers.arcgis.com/en/javascript/jshelp/ags_proxy.html
-  "proxyurl": "proxy.php",
+  //"proxyurl": "proxy.php",
   "bingKey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps
   //Defaults to arcgis.com. Set this value to your portal or organization host name.
   "sharinghost": location.protocol + "//" + "www.arcgis.com",
@@ -59,4 +59,4 @@ define({
       "url": null
     }]
   }
-});
+},config_json));

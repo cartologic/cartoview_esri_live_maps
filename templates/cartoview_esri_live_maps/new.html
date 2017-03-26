@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+        <style>
+            body{
+                padding-bottom: 80px;
+            }
+            .footer-tb{
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                border-top: solid 1px #ddd;
+            }
+            .icon-animate {
+                -animation: spin 1s infinite linear;
+                -webkit-animation: spin2 1s infinite linear;
+            }
+
+            @-webkit-keyframes spin2 {
+                from { -webkit-transform: rotate(0deg);}
+                to { -webkit-transform: rotate(360deg);}
+            }
+
+            @keyframes spin {
+                from { transform: scale(1) rotate(0deg);}
+                to { transform: scale(1) rotate(360deg);}
+            }
+            .nav-pills>li.error>a{
+                color: #b7152b;
+                background-color: rgba(219, 31, 64, 0.07);
+            }
+            .nav-pills>li.active.error>a{
+                color: #fff;
+                background-color: #b7152b;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div id="edit-form"></div>
+            </div>
+        </div>
+
+        <script src="{{ STATIC_URL }}esri-templates-config/dist/commons.js"></script>
+        <script src="{{ STATIC_URL }}esri-templates-config/dist/config-form.bundle.js"></script>
+
+        <script type="text/javascript">
+            function getCookie(name) {
+                var cookieValue = null;
+                if (document.cookie && document.cookie !== '') {
+                    var cookies = document.cookie.split(';');
+                    for (var i = 0; i < cookies.length; i++) {
+                        var cookie = cookies[i].trim();
+                        // Does this cookie string begin with the name we want?
+                        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                            break;
+                        }
+                    }
+                }
+                return cookieValue;
+            }
+            var props = {
+                portalHomeUrl: "{% url 'arcportal_home' %}",
+                configurationPanelUrl: "{{ STATIC_URL }}cartoview_esri_live_maps/resources/configurationPanel.js?v=1",
+                csrfmiddlewaretoken: getCookie('csrftoken')
+            };
+            //{% if instance %}
+            props.config = {{ instance.config | safe }};
+            //{% else %}
+            props.isNew = true;
+            //{% endif %}
+            var app = React.createElement(App, props);
+            ReactDOM.render(app, document.getElementById("edit-form"));
+        </script>
+    </body>
+</html>
