@@ -64,10 +64,13 @@ def edit(request, resource_id):
     return render(request, NEW_EDIT_TPL, context)
 
 
-from cartoview.proxy.views import send_request
+import requests
 def proxy(request):
     url = ""
-    for key in request.GET.keys():
-        if key.startswith('http'):
-            url = key
-    return send_request(request, url)
+    params = []
+    keys = ["http://live.esri.com/LiveMaps/feed.php?feed", "keyword", "lat","lon", "radius"]
+    for key in keys:
+        params.append("%s=%s" % (key, request.GET.get(key, "")))
+    url = "&".join(params)
+    print url
+    return HttpResponse(requests.get(url).text, content_type="text/json")
