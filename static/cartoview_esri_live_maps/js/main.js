@@ -380,16 +380,16 @@ define([
         switch (this.config.feed){
           case "flu":
           case "gastro":
-            attr.avatar = "images/sickweather.png";
+            attr.avatar =  STATIC_URL + "images/sickweather.png";
             break;
           case "flickr":
-            attr.avatar = "images/flickr.png";
+            attr.avatar = STATIC_URL + "images/flickr.png";
             break;
           case "twitter":
             attr.desc = this._linkify(rec.desc);
             break;
           default:
-            attr.avatar = "images/pin.png";
+            attr.avatar =  STATIC_URL + "images/pin.png";
             break;
         }
         var gra = new Graphic(pt, null, attr);
