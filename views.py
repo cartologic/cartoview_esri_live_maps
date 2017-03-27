@@ -66,11 +66,11 @@ def edit(request, resource_id):
 
 import requests
 def proxy(request):
-    url = ""
     params = []
-    keys = ["http://live.esri.com/LiveMaps/feed.php?feed", "keyword", "lat","lon", "radius"]
+    keys = ["http://live.esri.com/LiveMaps/feed.php?feed", "keyword", "lat","lon", "radius", "bbox"]
     for key in keys:
-        params.append("%s=%s" % (key, request.GET.get(key, "")))
+        val = request.GET.get(key, None)
+        if val is not None:
+            params.append("%s=%s" % (key, val))
     url = "&".join(params)
-    print url
     return HttpResponse(requests.get(url).text, content_type="text/json")
