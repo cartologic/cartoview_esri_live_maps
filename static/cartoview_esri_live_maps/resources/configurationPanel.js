@@ -1,6 +1,6 @@
 {
   "configurationSettings": [{
-    "category": "<b>Map</b>",
+    "category": "<b>Select Map</b>",
     "fields": [{
       "type": "webmap",
       "label": "Select a map"
